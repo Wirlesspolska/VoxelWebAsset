@@ -1,0 +1,19 @@
+# Local Python / PyInstaller artifacts (not needed for static hosting)
+__pycache__/
+*.py[cod]
+*.spec
+build/
+dist/
+VoxieServe.exe
+.venv/
+venv/
+
+# Nested duplicate / local tooling
+VoxelWebAsset/
+server/
+
+# Editor / Vercel local state
+.vercel/
+*.log
+.DS_Store
+Thumbs.db
