@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voxie — Part Machine Authoring</title>
+  <link rel="stylesheet" href="css/voxel-forge.css" />
+  <style>
+    .voxie-hub {
+      min-height: 100vh;
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 3.5rem 1.35rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .voxie-hub .brand {
+      margin: 0 0 0.2rem;
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      line-height: 1.05;
+    }
+
+    .voxie-hub .product {
+      margin: 0 0 1.75rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .voxie-hub .lede {
+      margin: 0 0 2rem;
+      color: var(--ink);
+      line-height: 1.55;
+      max-width: 32rem;
+    }
+
+    .voxie-hub .tools {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 0 0 2rem;
+    }
+
+    .voxie-hub a.tool {
+      display: block;
+      padding: 1rem 1.15rem;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(12, 14, 10, 0.45);
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .voxie-hub a.tool:hover,
+    .voxie-hub a.tool:focus-visible {
+      border-color: var(--accent);
+      background: #1c2418;
+      outline: none;
+    }
+
+    .voxie-hub a.tool .label {
+      display: block;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .voxie-hub a.tool .desc {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .voxie-hub .secondary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      margin-bottom: 1.75rem;
+    }
+
+    .voxie-hub .secondary a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .voxie-hub .secondary a:hover,
+    .voxie-hub .secondary a:focus-visible {
+      color: var(--ink);
+      outline: none;
+    }
+
+    .voxie-hub .recent {
+      margin: 0;
+    }
+
+    .voxie-hub .recent h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .voxie-hub .recent ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .voxie-hub .recent li,
+    .voxie-hub .recent .empty {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .voxie-hub .recent a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .voxie-hub .recent a:hover {
+      color: var(--accent);
+    }
+
+    .voxie-hub .recent .meta {
+      color: var(--muted);
+      margin-left: 0.35rem;
+    }
+
+    .voxie-hub .foot {
+      margin-top: 2.5rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.5;
+    }
+
+    .voxie-hub .foot code {
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <main class="voxie-hub">
+    <h1 class="brand">VOXIE</h1>
+    <p class="product">Part Machine · Authoring</p>
+    <p class="lede">
+      Sculpt voxel assets and cubic worlds. Saves land in <code>assets/</code> —
+      parts, worlds, textures, and projects.
+    </p>
+
+    <nav class="tools" aria-label="Authoring tools">
+      <a class="tool" href="voxel-forge.html">
+        <span class="label">Asset Forge</span>
+        <span class="desc">Voxel sculpt for parts &amp; props · VXP / JSON</span>
+      </a>
+      <a class="tool" href="voxel-world.html">
+        <span class="label">World Forge</span>
+        <span class="desc">Terrain &amp; cubic maps · VXW</span>
+      </a>
+    </nav>
+
+    <div class="secondary">
+      <a href="voxel-forge.html">Projects — open in Forge</a>
+      <a href="voxel-forge.html" title="File → Preferences… in Asset Forge">Preferences</a>
+    </div>
+
+    <section class="recent" aria-label="Open recent">
+      <h2>Open recent</h2>
+      <ul id="voxie-recent"></ul>
+      <p class="empty" id="voxie-recent-empty" hidden>
+        No recent files yet. Open or save from Asset Forge / World Forge.
+      </p>
+    </section>
+
+    <p class="foot">
+      Assets: <code>assets/parts/</code> · <code>assets/worlds/</code> ·
+      <code>assets/textures/</code> · <code>assets/projects/</code>
+    </p>
+  </main>
+  <script type="module">
+    const RECENT_KEY = "voxie3d.recent";
+    const listEl = document.getElementById("voxie-recent");
+    const emptyEl = document.getElementById("voxie-recent-empty");
+
+    function listRecent() {
+      try {
+        const raw = localStorage.getItem(RECENT_KEY);
+        if (!raw) return [];
+        const arr = JSON.parse(raw);
+        if (!Array.isArray(arr)) return [];
+        return arr.filter((e) => e && typeof e === "object").slice(0, 8);
+      } catch {
+        return [];
+      }
+    }
+
+    function forgeHref(entry) {
+      const t = String(entry.type || "").toLowerCase();
+      if (t === "world" || t === "vxw" || t === "map") return "voxel-world.html";
+      return "voxel-forge.html";
+    }
+
+    const recent = listRecent();
+    if (!recent.length) {
+      emptyEl.hidden = false;
+    } else {
+      for (const r of recent) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = forgeHref(r);
+        a.textContent = typeof r.name === "string" ? r.name : "untitled";
+        const meta = document.createElement("span");
+        meta.className = "meta";
+        meta.textContent = `· ${r.type || "part"} · open in forge`;
+        li.append(a, meta);
+        listEl.appendChild(li);
+      }
+    }
+  </script>
+</body>
+</html>

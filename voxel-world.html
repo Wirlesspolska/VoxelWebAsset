@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voxie3D World — Cubic Maps</title>
+  <link rel="stylesheet" href="css/voxel-forge.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="forge-app side-dock-left">
+    <header class="forge-chrome">
+      <h1 class="forge-brand">VOXIE3D WORLD</h1>
+      <nav class="forge-navbar" data-voxie-navbar aria-label="Forge menus"></nav>
+      <div class="forge-mode-badge is-world" data-voxie-mode-badge>WORLD</div>
+      <span class="forge-tag forge-chrome-tag">assets/worlds · CUBIC MAP</span>
+      <a class="forge-chrome-link" href="index.html">VOXIE HUB</a>
+      <a class="forge-chrome-link" href="voxel-forge.html">ASSET FORGE</a>
+    </header>
+
+    <!-- Left dock: Color + active tool (mounted by leftDock.js) -->
+    <aside class="forge-side side-panel" data-voxie-side-panel></aside>
+
+    <main class="forge-stage" id="forge-stage">
+      <canvas id="forge-canvas"></canvas>
+      <div class="hud-chip hud-controls" data-voxie-controls-bar role="status" aria-label="Controls">
+        <span class="hud-controls-label">Controls</span>
+        <span data-voxie-controls-help></span>
+      </div>
+    </main>
+  </div>
+
+  <div class="forge-modal" data-voxie-prefs-modal hidden>
+    <div class="forge-modal-panel" role="dialog" aria-labelledby="prefs-title-world">
+      <header class="forge-modal-head">
+        <h2 id="prefs-title-world">Preferences</h2>
+        <button type="button" class="btn" data-voxie-prefs-close>Close</button>
+      </header>
+      <div class="forge-modal-body">
+        <h3>POTATO PC MODE</h3>
+        <label class="check"><input type="checkbox" data-prefs-potato /> <b>POTATO PC MODE</b> — low-cost rendering</label>
+        <p class="forge-tag">Pixel ratio 1 · unlit voxels · coarser chunks · shorter draw distance. Borders stay independently togglable.</p>
+        <h3>Volume (origin-centered)</h3>
+        <label class="field">Size X <input type="number" data-prefs-size-x value="8" min="2" max="128" step="2" /><span></span></label>
+        <label class="field">Size Y <input type="number" data-prefs-size-y value="8" min="2" max="128" step="2" /><span></span></label>
+        <label class="field">Size Z <input type="number" data-prefs-size-z value="8" min="2" max="128" step="2" /><span></span></label>
+        <label class="check"><input type="checkbox" data-prefs-auto-expand checked /> Auto-expand when painting outside bounds</label>
+        <label class="check"><input type="checkbox" data-prefs-apply-size /> Apply Size X/Y/Z to current volume on save</label>
+        <label class="check"><input type="checkbox" data-prefs-show-axes /> Show RGB axis gizmo</label>
+        <h3>Editor defaults</h3>
+        <label class="check"><input type="checkbox" data-prefs-borders /> Voxel borders</label>
+        <label class="check"><input type="checkbox" data-prefs-grid checked /> Ground grid</label>
+        <label class="check"><input type="checkbox" data-prefs-noise /> Noise tint</label>
+        <label class="field">Layer
+          <select data-prefs-layer>
+            <option value="all">all</option>
+            <option value="active">active</option>
+            <option value="base+active">base+active</option>
+          </select>
+          <span></span>
+        </label>
+        <label class="field">Brush
+          <select data-prefs-brush>
+            <option value="1">1</option>
+            <option value="3">3</option>
+          </select>
+          <span></span>
+        </label>
+        <label class="field">Noise
+          <input type="range" min="0" max="25" value="8" data-prefs-noise-amt />
+          <span data-prefs-noise-amt-val>8%</span>
+        </label>
+        <h3>Camera (keyboard)</h3>
+        <label class="field">Move speed
+          <input type="number" data-prefs-move-speed value="10" min="0.25" max="64" step="0.5" />
+          <span>u/s</span>
+        </label>
+        <label class="check"><input type="checkbox" data-prefs-move-grid-snap /> Grid-snap keyboard move</label>
+        <h3>World defaults</h3>
+        <label class="field">zMin <input type="number" data-prefs-zmin value="0" step="1" /><span></span></label>
+        <label class="field">zMax <input type="number" data-prefs-zmax value="" step="1" placeholder="none" /><span></span></label>
+        <label class="field">Water <input type="number" data-prefs-water value="" step="1" placeholder="sea Z" /><span></span></label>
+      </div>
+      <footer class="forge-modal-foot">
+        <button type="button" class="btn" data-voxie-prefs-apply>Apply &amp; save</button>
+      </footer>
+    </div>
+  </div>
+
+  <script type="module" src="js/forge/worldApp.js"></script>
+</body>
+</html>
