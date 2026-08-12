@@ -1,0 +1,14 @@
+{
+  "magic": "VXAM1",
+  "note": "Authoring layout for Voxie3D — save downloads here conceptually. Game runtime stays in js/.",
+  "folders": {
+    "worlds": "assets/worlds/*.vxw — cubic maps / terrain / world volumes",
+    "parts": "assets/parts/*.json — forge part volumes",
+    "textures": "assets/textures/*.vxt — palettes / atlases",
+    "projects": "assets/projects/*.vxpj.json — project shells (name, type, worldBounds)"
+  },
+  "exampleAssets": [
+    { "id": "main", "kind": "vxw", "pathOrKey": "assets/worlds/untitled_world.vxw" },
+    { "id": "mat", "kind": "vxt", "pathOrKey": "assets/textures/default.vxt" }
+  ]
+}
